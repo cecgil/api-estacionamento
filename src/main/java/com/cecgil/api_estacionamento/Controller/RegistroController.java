@@ -3,6 +3,7 @@ package com.cecgil.api_estacionamento.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,13 +23,17 @@ public class RegistroController {
     private RegistroService registroService;
 
     @PostMapping("/entrada")
-    public Registro entrada(@RequestBody String placa) {
-        return registroService.registrarEntrada(placa);
+    public ResponseEntity<Registro> entrada(@RequestBody String placa) {
+        var result =  this.registroService.registrarEntrada(placa);
+        return ResponseEntity.ok().body(result);
+
+
     }
 
     @PostMapping("/saida")
-    public Registro saida(@RequestBody String placa) {
-        return registroService.registrarSaida(placa);
+    public ResponseEntity<Registro> saida(@RequestBody String placa) {
+        var result = this.registroService.registrarSaida(placa);
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping
